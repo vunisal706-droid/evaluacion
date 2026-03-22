@@ -197,6 +197,56 @@
 
   /* LOGO ICON IN BADGES */
   .logo-mini{width:28px;height:28px;border-radius:6px;object-fit:cover;vertical-align:middle}
+
+  /* ── BUSCADOR DE MATERIA ── */
+  .search-widget{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);
+    padding:20px 24px;margin-bottom:20px}
+  .search-widget-title{font-size:13px;font-weight:700;color:var(--gris);
+    text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;
+    display:flex;align-items:center;gap:8px}
+  .search-box-wrap{display:flex;gap:10px;align-items:center;margin-bottom:16px}
+  .search-input{flex:1;padding:12px 16px;border:2px solid var(--grisC);border-radius:10px;
+    font-size:16px;font-family:'DM Sans',sans-serif;outline:none;transition:border .2s}
+  .search-input:focus{border-color:var(--azulM)}
+  .search-clear{background:none;border:none;font-size:22px;cursor:pointer;
+    color:var(--gris);padding:4px 8px;border-radius:6px;transition:background .2s}
+  .search-clear:hover{background:var(--grisC)}
+  .search-suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .search-chip{padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;
+    cursor:pointer;border:2px solid var(--grisC);color:var(--gris);
+    transition:all .15s;background:#fff}
+  .search-chip:hover,.search-chip.active{background:linear-gradient(135deg,#E65100,#FF6F00);
+    color:#fff;border-color:transparent}
+  .search-result{display:none}
+  .search-result.visible{display:block}
+  .search-result-header{display:flex;align-items:center;gap:16px;
+    margin-bottom:16px;flex-wrap:wrap}
+  .search-materia-name{font-family:'Crimson Pro',serif;font-size:28px;font-weight:700;
+    color:var(--azul)}
+  .search-kpi-row{display:flex;gap:10px;flex-wrap:wrap}
+  .search-kpi{border-radius:10px;padding:10px 18px;text-align:center;min-width:80px}
+  .search-kpi-val{font-size:26px;font-weight:800;font-family:'Crimson Pro',serif;line-height:1}
+  .search-kpi-lbl{font-size:10px;font-weight:700;text-transform:uppercase;
+    letter-spacing:.4px;margin-top:3px;opacity:.8}
+  .sk-sb{background:#E3F2FD;color:var(--sb)}
+  .sk-nt{background:#E8F5E9;color:var(--nt)}
+  .sk-bi{background:#FFF8E1;color:var(--bi)}
+  .sk-su{background:#FFF3E0;color:var(--su)}
+  .sk-ins{background:#FFEBEE;color:var(--ins)}
+  .sk-pos{background:#E8F5E9;color:var(--verdeM)}
+  .search-chart-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  @media(max-width:700px){.search-chart-row{grid-template-columns:1fr}}
+  .search-chart-card{background:#F8F9FC;border-radius:var(--r);padding:16px}
+  .search-chart-card .card-title{font-size:12px;font-weight:700;color:var(--gris);
+    text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px}
+  .search-chart-wrap{height:200px;position:relative}
+  .search-alert{border-radius:10px;padding:12px 16px;font-size:13px;
+    font-weight:600;margin-top:12px;display:flex;align-items:center;gap:8px}
+  .search-alert.ok{background:#E8F5E9;color:var(--verdeM)}
+  .search-alert.warn{background:#FFEBEE;color:var(--rojo)}
+  .search-alert.amber{background:#FFF8E1;color:var(--ambar)}
+  .search-no-result{text-align:center;padding:30px;color:var(--gris);font-size:14px}
+
 </style>
 </head>
 <body>
@@ -396,6 +446,159 @@
       <div class="kpi nad"><div class="kpi-val">1</div><div class="kpi-label">No Adquirido</div><div class="kpi-sub">1,4%</div></div>
       <div class="kpi pos"><div class="kpi-val">98,6%</div><div class="kpi-label">Positivos</div><div class="kpi-sub">69 de 70</div></div>
     </div>
+
+  <div class="search-widget" id="sw-3a">
+    <div class="search-widget-title">🔍 Busca un área en 3 Años</div>
+    <div class="search-box-wrap">
+      <input type="text" class="search-input" id="si-3a"
+        placeholder="Escribe un área: ING, CA, DEE, CRR..."
+        oninput="srchFilter(this,'3a')" autocomplete="off">
+      <button class="search-clear" onclick="srchClear('3a')">✕</button>
+    </div>
+    <div class="search-suggestions" id="ss-3a"><span class="search-chip" onclick="srchSelect(this,'3a','ING')">ING</span><span class="search-chip" onclick="srchSelect(this,'3a','REL')">REL</span><span class="search-chip" onclick="srchSelect(this,'3a','ATEDU')">ATEDU</span><span class="search-chip" onclick="srchSelect(this,'3a','CA')">CA</span><span class="search-chip" onclick="srchSelect(this,'3a','DEE')">DEE</span><span class="search-chip" onclick="srchSelect(this,'3a','CRR')">CRR</span></div>
+    <div id="sno-3a" class="search-no-result" style="display:none">
+      🔎 No se encontró ese área. Prueba con: ING, REL, ATEDU, CA, DEE, CRR
+    </div>
+    
+      <div id="sr-3a-ING" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Inglés <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(ING) · 3 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">EXC 14.3%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">BUE 42.9%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">ADE 42.9%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NAD 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin NAD — ¡Resultado perfecto!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-3a-ING"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-3a-ING"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-3a-REL" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Religión <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(REL) · 3 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">EXC 25.0%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">BUE 50.0%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">ADE 12.5%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">NAD 12.5%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">87.5%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 12.5% de No Adquiridos. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-3a-REL"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-3a-REL"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-3a-ATEDU" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Atención Educativa <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(ATEDU) · 3 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">EXC 0.0%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">BUE 100.0%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">ADE 0.0%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NAD 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin NAD — ¡Resultado perfecto!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-3a-ATEDU"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-3a-ATEDU"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-3a-CA" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Crecimiento en Armonía <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(CA) · 3 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">EXC 7.1%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">8</div><div class="search-kpi-lbl">BUE 57.1%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">ADE 35.7%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NAD 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin NAD — ¡Resultado perfecto!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-3a-CA"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-3a-CA"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-3a-DEE" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Descubrimiento y Exploración <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(DEE) · 3 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">EXC 7.1%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">12</div><div class="search-kpi-lbl">BUE 85.7%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">ADE 7.1%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NAD 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin NAD — ¡Resultado perfecto!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-3a-DEE"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-3a-DEE"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-3a-CRR" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Comunicación y Representación <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(CRR) · 3 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">EXC 7.1%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">9</div><div class="search-kpi-lbl">BUE 64.3%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">ADE 28.6%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NAD 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin NAD — ¡Resultado perfecto!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-3a-CRR"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-3a-CRR"></canvas></div>
+          </div>
+        </div>
+      </div>
+  </div>
     <div class="chart-grid">
       <div class="card"><div class="card-title"><span class="card-title-ico">🍩</span>Distribución 3 Años</div><div class="chart-wrap"><canvas id="c3a_dona"></canvas></div></div>
       <div class="card"><div class="card-title"><span class="card-title-ico">📊</span>Por Área · 3 Años</div><div class="chart-wrap"><canvas id="c3a_bar"></canvas></div></div>
@@ -436,6 +639,136 @@
       <div class="kpi neg"><div class="kpi-val">84,4%</div><div class="kpi-label">Positivos</div><div class="kpi-sub">38 de 45</div></div>
     </div>
     <div class="alert alert-warn"><p><strong>⚠️ Grupo de atención:</strong> 7 de los 8 NAD de toda la etapa de Infantil se concentran en este grupo (87,5 %). El área de <strong>Crecimiento en Armonía</strong> presenta un 33,3 % de NAD (3 de 9 alumnos).</p></div>
+
+  <div class="search-widget" id="sw-4a">
+    <div class="search-widget-title">🔍 Busca un área en 4 Años</div>
+    <div class="search-box-wrap">
+      <input type="text" class="search-input" id="si-4a"
+        placeholder="Escribe un área: ING, CA, DEE, CRR..."
+        oninput="srchFilter(this,'4a')" autocomplete="off">
+      <button class="search-clear" onclick="srchClear('4a')">✕</button>
+    </div>
+    <div class="search-suggestions" id="ss-4a"><span class="search-chip" onclick="srchSelect(this,'4a','ING')">ING</span><span class="search-chip" onclick="srchSelect(this,'4a','REL')">REL</span><span class="search-chip" onclick="srchSelect(this,'4a','CA')">CA</span><span class="search-chip" onclick="srchSelect(this,'4a','DEE')">DEE</span><span class="search-chip" onclick="srchSelect(this,'4a','CRR')">CRR</span></div>
+    <div id="sno-4a" class="search-no-result" style="display:none">
+      🔎 No se encontró ese área. Prueba con: ING, REL, CA, DEE, CRR
+    </div>
+    
+      <div id="sr-4a-ING" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Inglés <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(ING) · 4 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">EXC 11.1%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">BUE 44.4%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">ADE 44.4%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NAD 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin NAD — ¡Resultado perfecto!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-4a-ING"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-4a-ING"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-4a-REL" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Religión <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(REL) · 4 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">EXC 22.2%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BUE 33.3%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">ADE 33.3%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">NAD 11.1%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">88.9%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 11.1% de No Adquiridos. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-4a-REL"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-4a-REL"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-4a-CA" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Crecimiento en Armonía <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(CA) · 4 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">EXC 22.2%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BUE 33.3%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">ADE 11.1%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">NAD 33.3%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">66.7%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">🔴 33.3% de No Adquiridos. Intervención urgente.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-4a-CA"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-4a-CA"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-4a-DEE" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Descubrimiento y Exploración <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(DEE) · 4 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">EXC 22.2%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BUE 33.3%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">ADE 22.2%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">NAD 22.2%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">77.8%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 22.2% de No Adquiridos. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-4a-DEE"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-4a-DEE"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-4a-CRR" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Comunicación y Representación <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(CRR) · 4 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">EXC 22.2%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">BUE 11.1%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">ADE 55.6%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">NAD 11.1%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">88.9%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 11.1% de No Adquiridos. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-4a-CRR"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-4a-CRR"></canvas></div>
+          </div>
+        </div>
+      </div>
+  </div>
     <div class="chart-grid">
       <div class="card"><div class="card-title"><span class="card-title-ico">🍩</span>Distribución 4 Años</div><div class="chart-wrap"><canvas id="c4a_dona"></canvas></div></div>
       <div class="card"><div class="card-title"><span class="card-title-ico">📊</span>Por Área · 4 Años</div><div class="chart-wrap"><canvas id="c4a_bar"></canvas></div></div>
@@ -475,6 +808,159 @@
       <div class="kpi pos"><div class="kpi-val">100%</div><div class="kpi-label">Positivos</div><div class="kpi-sub">65 de 65</div></div>
     </div>
     <div class="alert alert-ok"><p><strong>⭐ Grupo referente:</strong> 0 NAD en toda la unidad. El 87,7 % de las calificaciones son EXC o BUE. La clase de REL obtiene 9 de 10 alumnos con Excelente.</p></div>
+
+  <div class="search-widget" id="sw-5a">
+    <div class="search-widget-title">🔍 Busca un área en 5 Años</div>
+    <div class="search-box-wrap">
+      <input type="text" class="search-input" id="si-5a"
+        placeholder="Escribe un área: ING, CA, DEE, CRR..."
+        oninput="srchFilter(this,'5a')" autocomplete="off">
+      <button class="search-clear" onclick="srchClear('5a')">✕</button>
+    </div>
+    <div class="search-suggestions" id="ss-5a"><span class="search-chip" onclick="srchSelect(this,'5a','ING')">ING</span><span class="search-chip" onclick="srchSelect(this,'5a','REL')">REL</span><span class="search-chip" onclick="srchSelect(this,'5a','ATEDU')">ATEDU</span><span class="search-chip" onclick="srchSelect(this,'5a','CA')">CA</span><span class="search-chip" onclick="srchSelect(this,'5a','DEE')">DEE</span><span class="search-chip" onclick="srchSelect(this,'5a','CRR')">CRR</span></div>
+    <div id="sno-5a" class="search-no-result" style="display:none">
+      🔎 No se encontró ese área. Prueba con: ING, REL, ATEDU, CA, DEE, CRR
+    </div>
+    
+      <div id="sr-5a-ING" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Inglés <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(ING) · 5 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">EXC 23.1%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">8</div><div class="search-kpi-lbl">BUE 61.5%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">ADE 15.4%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NAD 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin NAD — ¡Resultado perfecto!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5a-ING"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5a-ING"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-5a-REL" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Religión <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(REL) · 5 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">9</div><div class="search-kpi-lbl">EXC 90.0%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">BUE 10.0%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">ADE 0.0%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NAD 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin NAD — ¡Resultado perfecto!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5a-REL"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5a-REL"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-5a-ATEDU" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Atención Educativa <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(ATEDU) · 5 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">EXC 33.3%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">BUE 66.7%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">ADE 0.0%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NAD 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin NAD — ¡Resultado perfecto!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5a-ATEDU"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5a-ATEDU"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-5a-CA" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Crecimiento en Armonía <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(CA) · 5 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">EXC 46.2%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">BUE 38.5%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">ADE 15.4%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NAD 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin NAD — ¡Resultado perfecto!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5a-CA"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5a-CA"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-5a-DEE" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Descubrimiento y Exploración <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(DEE) · 5 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">EXC 46.2%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">BUE 38.5%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">ADE 15.4%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NAD 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin NAD — ¡Resultado perfecto!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5a-DEE"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5a-DEE"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-5a-CRR" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Comunicación y Representación <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(CRR) · 5 Años</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">EXC 38.5%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">BUE 46.2%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">ADE 15.4%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NAD 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin NAD — ¡Resultado perfecto!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5a-CRR"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5a-CRR"></canvas></div>
+          </div>
+        </div>
+      </div>
+  </div>
     <div class="chart-grid">
       <div class="card"><div class="card-title"><span class="card-title-ico">🍩</span>Distribución 5 Años</div><div class="chart-wrap"><canvas id="c5a_dona"></canvas></div></div>
       <div class="card"><div class="card-title"><span class="card-title-ico">📊</span>Por Área · 5 Años</div><div class="chart-wrap"><canvas id="c5a_bar"></canvas></div></div>
@@ -553,6 +1039,165 @@
       <div class="kpi ins"><div class="kpi-val">4</div><div class="kpi-label">IN</div><div class="kpi-sub">4,2%</div></div>
       <div class="kpi pos"><div class="kpi-val">95,8%</div><div class="kpi-label">Positivos</div><div class="kpi-sub">92 de 96</div></div>
     </div>
+
+  <div class="search-widget" id="sw-1ep">
+    <div class="search-widget-title">🔍 Busca una materia en 1.º EP</div>
+    <div class="search-box-wrap">
+      <input type="text" class="search-input" id="si-1ep"
+        placeholder="Escribe una materia: CMN, MAT, LCL, ING..."
+        oninput="srchFilter(this,'1ep')" autocomplete="off">
+      <button class="search-clear" onclick="srchClear('1ep')">✕</button>
+    </div>
+    <div class="search-suggestions" id="ss-1ep"><span class="search-chip" onclick="srchSelect(this,'1ep','CMN')">CMN</span><span class="search-chip" onclick="srchSelect(this,'1ep','EAR')">EAR</span><span class="search-chip" onclick="srchSelect(this,'1ep','EFI')">EFI</span><span class="search-chip" onclick="srchSelect(this,'1ep','LCL')">LCL</span><span class="search-chip" onclick="srchSelect(this,'1ep','ING')">ING</span><span class="search-chip" onclick="srchSelect(this,'1ep','MAT')">MAT</span></div>
+    <div id="sno-1ep" class="search-no-result" style="display:none">
+      🔎 No se encontró esa materia. Prueba con: CMN, EAR, EFI, LCL, ING, MAT
+    </div>
+    
+      <div id="sr-1ep-CMN" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Conocimiento del Medio <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(CMN) · 1.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SB 25.0%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">NT 31.2%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 18.8%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">SU 18.8%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">IN 6.2%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">93.8%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 6.2% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-1ep-CMN"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-1ep-CMN"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-1ep-EAR" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Ed. Artística <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(EAR) · 1.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SB 25.0%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">10</div><div class="search-kpi-lbl">NT 62.5%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">BI 0.0%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SU 12.5%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">IN 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin Insuficientes — ¡Excelente resultado!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-1ep-EAR"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-1ep-EAR"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-1ep-EFI" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Ed. Física <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(EFI) · 1.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SB 12.5%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">9</div><div class="search-kpi-lbl">NT 56.2%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">BI 25.0%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">SU 6.2%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">IN 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin Insuficientes — ¡Excelente resultado!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-1ep-EFI"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-1ep-EFI"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-1ep-LCL" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Lengua Castellana <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(LCL) · 1.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">8</div><div class="search-kpi-lbl">SB 50.0%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">NT 0.0%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 18.8%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SU 25.0%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">IN 6.2%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">93.8%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 6.2% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-1ep-LCL"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-1ep-LCL"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-1ep-ING" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Inglés <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(ING) · 1.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">SB 37.5%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">NT 12.5%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">BI 0.0%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">7</div><div class="search-kpi-lbl">SU 43.8%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">IN 6.2%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">93.8%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 6.2% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-1ep-ING"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-1ep-ING"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-1ep-MAT" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Matemáticas <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(MAT) · 1.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">SB 37.5%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">NT 12.5%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 18.8%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SU 25.0%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">IN 6.2%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">93.8%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 6.2% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-1ep-MAT"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-1ep-MAT"></canvas></div>
+          </div>
+        </div>
+      </div>
+  </div>
     <div class="chart-grid">
       <div class="card"><div class="card-title">Distribución 1.º EP</div><div class="chart-wrap"><canvas id="c1ep_dona"></canvas></div></div>
       <div class="card"><div class="card-title">Por Materia · 1.º EP</div><div class="chart-wrap"><canvas id="c1ep_bar"></canvas></div></div>
@@ -591,6 +1236,165 @@
       <div class="kpi ins"><div class="kpi-val">18</div><div class="kpi-label">IN</div><div class="kpi-sub">12,5%</div></div>
       <div class="kpi pos"><div class="kpi-val">87,5%</div><div class="kpi-label">Positivos</div><div class="kpi-sub">126 de 144</div></div>
     </div>
+
+  <div class="search-widget" id="sw-2ep">
+    <div class="search-widget-title">🔍 Busca una materia en 2.º EP</div>
+    <div class="search-box-wrap">
+      <input type="text" class="search-input" id="si-2ep"
+        placeholder="Escribe una materia: CMN, MAT, LCL, ING..."
+        oninput="srchFilter(this,'2ep')" autocomplete="off">
+      <button class="search-clear" onclick="srchClear('2ep')">✕</button>
+    </div>
+    <div class="search-suggestions" id="ss-2ep"><span class="search-chip" onclick="srchSelect(this,'2ep','CMN')">CMN</span><span class="search-chip" onclick="srchSelect(this,'2ep','EAR')">EAR</span><span class="search-chip" onclick="srchSelect(this,'2ep','EFI')">EFI</span><span class="search-chip" onclick="srchSelect(this,'2ep','LCL')">LCL</span><span class="search-chip" onclick="srchSelect(this,'2ep','ING')">ING</span><span class="search-chip" onclick="srchSelect(this,'2ep','MAT')">MAT</span></div>
+    <div id="sno-2ep" class="search-no-result" style="display:none">
+      🔎 No se encontró esa materia. Prueba con: CMN, EAR, EFI, LCL, ING, MAT
+    </div>
+    
+      <div id="sr-2ep-CMN" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Conocimiento del Medio <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(CMN) · 2.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">SB 4.2%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">NT 25.0%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 12.5%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">11</div><div class="search-kpi-lbl">SU 45.8%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">IN 12.5%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">87.5%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 12.5% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-2ep-CMN"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-2ep-CMN"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-2ep-EAR" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Ed. Artística <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(EAR) · 2.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">13</div><div class="search-kpi-lbl">SB 54.2%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">10</div><div class="search-kpi-lbl">NT 41.7%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">BI 4.2%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">SU 0.0%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">IN 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin Insuficientes — ¡Excelente resultado!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-2ep-EAR"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-2ep-EAR"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-2ep-EFI" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Ed. Física <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(EFI) · 2.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">SB 4.2%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">16</div><div class="search-kpi-lbl">NT 66.7%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">7</div><div class="search-kpi-lbl">BI 29.2%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">SU 0.0%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">IN 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin Insuficientes — ¡Excelente resultado!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-2ep-EFI"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-2ep-EFI"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-2ep-LCL" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Lengua Castellana <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(LCL) · 2.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">SB 4.2%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">NT 25.0%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">7</div><div class="search-kpi-lbl">BI 29.2%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SU 16.7%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">IN 25.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">75.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">⚠️ 25.0% de Insuficientes. Seguimiento prioritario.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-2ep-LCL"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-2ep-LCL"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-2ep-ING" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Inglés <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(ING) · 2.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SB 16.7%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">8</div><div class="search-kpi-lbl">NT 33.3%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 12.5%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">SU 20.8%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">IN 16.7%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">83.3%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 16.7% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-2ep-ING"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-2ep-ING"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-2ep-MAT" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Matemáticas <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(MAT) · 2.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">SB 0.0%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">8</div><div class="search-kpi-lbl">NT 33.3%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 12.5%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">8</div><div class="search-kpi-lbl">SU 33.3%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">IN 20.8%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">79.2%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">⚠️ 20.8% de Insuficientes. Seguimiento prioritario.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-2ep-MAT"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-2ep-MAT"></canvas></div>
+          </div>
+        </div>
+      </div>
+  </div>
     <div class="chart-grid">
       <div class="card"><div class="card-title">Distribución 2.º EP</div><div class="chart-wrap"><canvas id="c2ep_dona"></canvas></div></div>
       <div class="card"><div class="card-title">Por Materia · 2.º EP</div><div class="chart-wrap"><canvas id="c2ep_bar"></canvas></div></div>
@@ -616,6 +1420,165 @@
       <div class="kpi ins"><div class="kpi-val">24</div><div class="kpi-label">IN</div><div class="kpi-sub">21,1%</div></div>
       <div class="kpi neg"><div class="kpi-val">78,9%</div><div class="kpi-label">Positivos</div><div class="kpi-sub">90 de 114</div></div>
     </div>
+
+  <div class="search-widget" id="sw-3ep">
+    <div class="search-widget-title">🔍 Busca una materia en 3.º EP</div>
+    <div class="search-box-wrap">
+      <input type="text" class="search-input" id="si-3ep"
+        placeholder="Escribe una materia: CMN, MAT, LCL, ING..."
+        oninput="srchFilter(this,'3ep')" autocomplete="off">
+      <button class="search-clear" onclick="srchClear('3ep')">✕</button>
+    </div>
+    <div class="search-suggestions" id="ss-3ep"><span class="search-chip" onclick="srchSelect(this,'3ep','CMN')">CMN</span><span class="search-chip" onclick="srchSelect(this,'3ep','EAR')">EAR</span><span class="search-chip" onclick="srchSelect(this,'3ep','EFI')">EFI</span><span class="search-chip" onclick="srchSelect(this,'3ep','LCL')">LCL</span><span class="search-chip" onclick="srchSelect(this,'3ep','ING')">ING</span><span class="search-chip" onclick="srchSelect(this,'3ep','MAT')">MAT</span></div>
+    <div id="sno-3ep" class="search-no-result" style="display:none">
+      🔎 No se encontró esa materia. Prueba con: CMN, EAR, EFI, LCL, ING, MAT
+    </div>
+    
+      <div id="sr-3ep-CMN" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Conocimiento del Medio <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(CMN) · 3.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">SB 5.3%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">NT 15.8%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 15.8%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SU 10.5%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">10</div><div class="search-kpi-lbl">IN 52.6%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">47.4%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">🔴 Atención: 52.6% de Insuficientes. Requiere intervención urgente.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-3ep-CMN"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-3ep-CMN"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-3ep-EAR" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Ed. Artística <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(EAR) · 3.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">8</div><div class="search-kpi-lbl">SB 42.1%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">8</div><div class="search-kpi-lbl">NT 42.1%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">BI 5.3%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SU 10.5%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">IN 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin Insuficientes — ¡Excelente resultado!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-3ep-EAR"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-3ep-EAR"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-3ep-EFI" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Ed. Física <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(EFI) · 3.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">SB 5.3%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">13</div><div class="search-kpi-lbl">NT 68.4%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">BI 26.3%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">SU 0.0%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">IN 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin Insuficientes — ¡Excelente resultado!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-3ep-EFI"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-3ep-EFI"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-3ep-LCL" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Lengua Castellana <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(LCL) · 3.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SB 10.5%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">NT 21.1%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">BI 21.1%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">SU 15.8%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">IN 31.6%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">68.4%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">⚠️ 31.6% de Insuficientes. Seguimiento prioritario.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-3ep-LCL"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-3ep-LCL"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-3ep-ING" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Inglés <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(ING) · 3.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SB 21.1%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">NT 31.6%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 15.8%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">SU 26.3%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">IN 5.3%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">94.7%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 5.3% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-3ep-ING"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-3ep-ING"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-3ep-MAT" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Matemáticas <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(MAT) · 3.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">SB 15.8%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">NT 26.3%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">BI 10.5%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SU 10.5%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">7</div><div class="search-kpi-lbl">IN 36.8%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">63.2%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">⚠️ 36.8% de Insuficientes. Seguimiento prioritario.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-3ep-MAT"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-3ep-MAT"></canvas></div>
+          </div>
+        </div>
+      </div>
+  </div>
     <div class="chart-grid">
       <div class="card"><div class="card-title">Distribución 3.º EP</div><div class="chart-wrap"><canvas id="c3ep_dona"></canvas></div></div>
       <div class="card"><div class="card-title">Por Materia · 3.º EP</div><div class="chart-wrap"><canvas id="c3ep_bar"></canvas></div></div>
@@ -642,6 +1605,165 @@
       <div class="kpi ins"><div class="kpi-val">26</div><div class="kpi-label">IN</div><div class="kpi-sub">20,6%</div></div>
       <div class="kpi neg"><div class="kpi-val">79,4%</div><div class="kpi-label">Positivos</div><div class="kpi-sub">100 de 126</div></div>
     </div>
+
+  <div class="search-widget" id="sw-4ep">
+    <div class="search-widget-title">🔍 Busca una materia en 4.º EP</div>
+    <div class="search-box-wrap">
+      <input type="text" class="search-input" id="si-4ep"
+        placeholder="Escribe una materia: CMN, MAT, LCL, ING..."
+        oninput="srchFilter(this,'4ep')" autocomplete="off">
+      <button class="search-clear" onclick="srchClear('4ep')">✕</button>
+    </div>
+    <div class="search-suggestions" id="ss-4ep"><span class="search-chip" onclick="srchSelect(this,'4ep','CMN')">CMN</span><span class="search-chip" onclick="srchSelect(this,'4ep','EAR')">EAR</span><span class="search-chip" onclick="srchSelect(this,'4ep','EFI')">EFI</span><span class="search-chip" onclick="srchSelect(this,'4ep','LCL')">LCL</span><span class="search-chip" onclick="srchSelect(this,'4ep','ING')">ING</span><span class="search-chip" onclick="srchSelect(this,'4ep','MAT')">MAT</span></div>
+    <div id="sno-4ep" class="search-no-result" style="display:none">
+      🔎 No se encontró esa materia. Prueba con: CMN, EAR, EFI, LCL, ING, MAT
+    </div>
+    
+      <div id="sr-4ep-CMN" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Conocimiento del Medio <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(CMN) · 4.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">SB 4.8%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">NT 28.6%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 14.3%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SU 19.0%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">7</div><div class="search-kpi-lbl">IN 33.3%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">66.7%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">⚠️ 33.3% de Insuficientes. Seguimiento prioritario.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-4ep-CMN"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-4ep-CMN"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-4ep-EAR" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Ed. Artística <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(EAR) · 4.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">SB 14.3%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">11</div><div class="search-kpi-lbl">NT 52.4%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 14.3%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">SU 4.8%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">IN 14.3%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">85.7%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 14.3% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-4ep-EAR"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-4ep-EAR"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-4ep-EFI" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Ed. Física <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(EFI) · 4.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SB 9.5%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">10</div><div class="search-kpi-lbl">NT 47.6%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">BI 28.6%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">SU 14.3%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">IN 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin Insuficientes — ¡Excelente resultado!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-4ep-EFI"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-4ep-EFI"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-4ep-LCL" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Lengua Castellana <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(LCL) · 4.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">SB 4.8%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">7</div><div class="search-kpi-lbl">NT 33.3%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">BI 23.8%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">SU 14.3%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">IN 23.8%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">76.2%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">⚠️ 23.8% de Insuficientes. Seguimiento prioritario.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-4ep-LCL"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-4ep-LCL"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-4ep-ING" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Inglés <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(ING) · 4.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">SB 4.8%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">NT 23.8%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">BI 28.6%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SU 19.0%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">IN 23.8%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">76.2%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">⚠️ 23.8% de Insuficientes. Seguimiento prioritario.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-4ep-ING"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-4ep-ING"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-4ep-MAT" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Matemáticas <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(MAT) · 4.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SB 9.5%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">7</div><div class="search-kpi-lbl">NT 33.3%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 14.3%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">SU 14.3%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">IN 28.6%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">71.4%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">⚠️ 28.6% de Insuficientes. Seguimiento prioritario.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-4ep-MAT"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-4ep-MAT"></canvas></div>
+          </div>
+        </div>
+      </div>
+  </div>
     <div class="chart-grid">
       <div class="card"><div class="card-title">Distribución 4.º EP</div><div class="chart-wrap"><canvas id="c4ep_dona"></canvas></div></div>
       <div class="card"><div class="card-title">Por Materia · 4.º EP</div><div class="chart-wrap"><canvas id="c4ep_bar"></canvas></div></div>
@@ -667,6 +1789,189 @@
       <div class="kpi ins"><div class="kpi-val">19</div><div class="kpi-label">IN</div><div class="kpi-sub">17,6%</div></div>
       <div class="kpi su"><div class="kpi-val">82,4%</div><div class="kpi-label">Positivos</div><div class="kpi-sub">89 de 108</div></div>
     </div>
+
+  <div class="search-widget" id="sw-5ep">
+    <div class="search-widget-title">🔍 Busca una materia en 5.º EP</div>
+    <div class="search-box-wrap">
+      <input type="text" class="search-input" id="si-5ep"
+        placeholder="Escribe una materia: CMN, MAT, LCL, ING..."
+        oninput="srchFilter(this,'5ep')" autocomplete="off">
+      <button class="search-clear" onclick="srchClear('5ep')">✕</button>
+    </div>
+    <div class="search-suggestions" id="ss-5ep"><span class="search-chip" onclick="srchSelect(this,'5ep','CMN')">CMN</span><span class="search-chip" onclick="srchSelect(this,'5ep','EAR')">EAR</span><span class="search-chip" onclick="srchSelect(this,'5ep','EFI')">EFI</span><span class="search-chip" onclick="srchSelect(this,'5ep','LCL')">LCL</span><span class="search-chip" onclick="srchSelect(this,'5ep','ING')">ING</span><span class="search-chip" onclick="srchSelect(this,'5ep','MAT')">MAT</span><span class="search-chip" onclick="srchSelect(this,'5ep','FR2')">FR2</span></div>
+    <div id="sno-5ep" class="search-no-result" style="display:none">
+      🔎 No se encontró esa materia. Prueba con: CMN, EAR, EFI, LCL, ING, MAT, FR2
+    </div>
+    
+      <div id="sr-5ep-CMN" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Conocimiento del Medio <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(CMN) · 5.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SB 11.1%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">NT 22.2%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">BI 0.0%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SU 11.1%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">10</div><div class="search-kpi-lbl">IN 55.6%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">44.4%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">🔴 Atención: 55.6% de Insuficientes. Requiere intervención urgente.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5ep-CMN"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5ep-CMN"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-5ep-EAR" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Ed. Artística <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(EAR) · 5.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SB 22.2%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">8</div><div class="search-kpi-lbl">NT 44.4%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">BI 22.2%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SU 11.1%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">IN 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin Insuficientes — ¡Excelente resultado!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5ep-EAR"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5ep-EAR"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-5ep-EFI" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Ed. Física <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(EFI) · 5.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">SB 5.6%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">13</div><div class="search-kpi-lbl">NT 72.2%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">BI 11.1%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SU 11.1%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">IN 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin Insuficientes — ¡Excelente resultado!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5ep-EFI"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5ep-EFI"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-5ep-LCL" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Lengua Castellana <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(LCL) · 5.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">SB 16.7%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">NT 22.2%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 16.7%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">SU 27.8%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">IN 16.7%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">83.3%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 16.7% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5ep-LCL"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5ep-LCL"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-5ep-ING" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Inglés <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(ING) · 5.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">SB 16.7%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">NT 16.7%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">BI 11.1%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">7</div><div class="search-kpi-lbl">SU 38.9%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">IN 16.7%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">83.3%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 16.7% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5ep-ING"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5ep-ING"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-5ep-MAT" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Matemáticas <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(MAT) · 5.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">SB 16.7%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">NT 22.2%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">BI 22.2%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SU 22.2%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">IN 16.7%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">83.3%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 16.7% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5ep-MAT"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5ep-MAT"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-5ep-FR2" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Francés (2ª L.) <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(FR2) · 5.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SB 30.8%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">NT 23.1%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">BI 15.4%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">SU 30.8%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">IN 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin Insuficientes — ¡Excelente resultado!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-5ep-FR2"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-5ep-FR2"></canvas></div>
+          </div>
+        </div>
+      </div>
+  </div>
     <div class="chart-grid">
       <div class="card"><div class="card-title">Distribución 5.º EP</div><div class="chart-wrap"><canvas id="c5ep_dona"></canvas></div></div>
       <div class="card"><div class="card-title">Por Materia · 5.º EP</div><div class="chart-wrap"><canvas id="c5ep_bar"></canvas></div></div>
@@ -692,6 +1997,165 @@
       <div class="kpi ins"><div class="kpi-val">15</div><div class="kpi-label">IN</div><div class="kpi-sub">13,2%</div></div>
       <div class="kpi pos"><div class="kpi-val">86,8%</div><div class="kpi-label">Positivos</div><div class="kpi-sub">99 de 114</div></div>
     </div>
+
+  <div class="search-widget" id="sw-6ep">
+    <div class="search-widget-title">🔍 Busca una materia en 6.º EP</div>
+    <div class="search-box-wrap">
+      <input type="text" class="search-input" id="si-6ep"
+        placeholder="Escribe una materia: CMN, MAT, LCL, ING..."
+        oninput="srchFilter(this,'6ep')" autocomplete="off">
+      <button class="search-clear" onclick="srchClear('6ep')">✕</button>
+    </div>
+    <div class="search-suggestions" id="ss-6ep"><span class="search-chip" onclick="srchSelect(this,'6ep','CMN')">CMN</span><span class="search-chip" onclick="srchSelect(this,'6ep','EAR')">EAR</span><span class="search-chip" onclick="srchSelect(this,'6ep','EFI')">EFI</span><span class="search-chip" onclick="srchSelect(this,'6ep','LCL')">LCL</span><span class="search-chip" onclick="srchSelect(this,'6ep','ING')">ING</span><span class="search-chip" onclick="srchSelect(this,'6ep','MAT')">MAT</span></div>
+    <div id="sno-6ep" class="search-no-result" style="display:none">
+      🔎 No se encontró esa materia. Prueba con: CMN, EAR, EFI, LCL, ING, MAT
+    </div>
+    
+      <div id="sr-6ep-CMN" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Conocimiento del Medio <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(CMN) · 6.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">SB 15.8%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">NT 21.1%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">BI 10.5%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">SU 26.3%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">IN 26.3%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">73.7%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">⚠️ 26.3% de Insuficientes. Seguimiento prioritario.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-6ep-CMN"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-6ep-CMN"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-6ep-EAR" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Ed. Artística <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(EAR) · 6.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">8</div><div class="search-kpi-lbl">SB 42.1%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">9</div><div class="search-kpi-lbl">NT 47.4%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">BI 10.5%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">SU 0.0%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">IN 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin Insuficientes — ¡Excelente resultado!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-6ep-EAR"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-6ep-EAR"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-6ep-EFI" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Ed. Física <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(EFI) · 6.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">SB 5.3%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">13</div><div class="search-kpi-lbl">NT 68.4%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">BI 26.3%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">SU 0.0%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">0</div><div class="search-kpi-lbl">IN 0.0%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">100.0%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert ok">✅ Sin Insuficientes — ¡Excelente resultado!</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-6ep-EFI"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-6ep-EFI"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-6ep-LCL" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Lengua Castellana <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(LCL) · 6.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SB 10.5%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">NT 26.3%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">BI 15.8%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">7</div><div class="search-kpi-lbl">SU 36.8%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">IN 10.5%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">89.5%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 10.5% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-6ep-LCL"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-6ep-LCL"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-6ep-ING" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Inglés <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(ING) · 6.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">SB 26.3%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">NT 26.3%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">1</div><div class="search-kpi-lbl">BI 5.3%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">SU 26.3%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">3</div><div class="search-kpi-lbl">IN 15.8%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">84.2%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert amber">🟡 15.8% de Insuficientes. Seguimiento recomendado.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-6ep-ING"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-6ep-ING"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div id="sr-6ep-MAT" class="search-result">
+        <div class="search-result-header">
+          <div class="search-materia-name">Matemáticas <span style="font-size:15px;color:var(--gris);font-family:'DM Sans',sans-serif">(MAT) · 6.º EP</span></div>
+        </div>
+        <div class="search-kpi-row">
+          <div class="search-kpi sk-sb"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">SB 10.5%</div></div>
+          <div class="search-kpi sk-nt"><div class="search-kpi-val">4</div><div class="search-kpi-lbl">NT 21.1%</div></div>
+          <div class="search-kpi sk-bi"><div class="search-kpi-val">2</div><div class="search-kpi-lbl">BI 10.5%</div></div>
+          <div class="search-kpi sk-su"><div class="search-kpi-val">6</div><div class="search-kpi-lbl">SU 31.6%</div></div>
+          <div class="search-kpi sk-ins"><div class="search-kpi-val">5</div><div class="search-kpi-lbl">IN 26.3%</div></div>
+          <div class="search-kpi sk-pos"><div class="search-kpi-val">73.7%</div><div class="search-kpi-lbl">✅ Positivos</div></div>
+        </div>
+        <div class="search-alert warn">⚠️ 26.3% de Insuficientes. Seguimiento prioritario.</div>
+        <div class="search-chart-row">
+          <div class="search-chart-card">
+            <div class="card-title">📊 Distribución por calificación</div>
+            <div class="search-chart-wrap"><canvas id="sc-bar-6ep-MAT"></canvas></div>
+          </div>
+          <div class="search-chart-card">
+            <div class="card-title">🍩 Proporción</div>
+            <div class="search-chart-wrap"><canvas id="sc-dona-6ep-MAT"></canvas></div>
+          </div>
+        </div>
+      </div>
+  </div>
     <div class="chart-grid">
       <div class="card"><div class="card-title">Distribución 6.º EP</div><div class="chart-wrap"><canvas id="c6ep_dona"></canvas></div></div>
       <div class="card"><div class="card-title">Por Materia · 6.º EP</div><div class="chart-wrap"><canvas id="c6ep_bar"></canvas></div></div>
@@ -1480,6 +2944,167 @@ function dlFile(name) {
   a.click();
   setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
 }
+
+// ── SEARCH WIDGET ──────────────────────────────────────────────
+var _srchCharts = {};
+
+var _srchData = {
+  // PRIMARIA [SB, NT, BI, SU, IN]
+  '1ep': {
+    'CMN': [4,5,3,3,1], 'EAR': [4,10,0,2,0], 'EFI': [2,9,4,1,0],
+    'LCL': [8,0,3,4,1], 'ING': [6,2,0,7,1],  'MAT': [6,2,3,4,1]
+  },
+  '2ep': {
+    'CMN': [1,6,3,11,3], 'EAR': [13,10,1,0,0], 'EFI': [1,16,7,0,0],
+    'LCL': [1,6,7,4,6],  'ING': [4,8,3,5,4],   'MAT': [0,8,3,8,5]
+  },
+  '3ep': {
+    'CMN': [1,3,3,2,10], 'EAR': [8,8,1,2,0], 'EFI': [1,13,5,0,0],
+    'LCL': [2,4,4,3,6],  'ING': [4,6,3,5,1], 'MAT': [3,5,2,2,7]
+  },
+  '4ep': {
+    'CMN': [1,6,3,4,7], 'EAR': [3,11,3,1,3], 'EFI': [2,10,6,3,0],
+    'LCL': [1,7,5,3,5], 'ING': [1,5,6,4,5],  'MAT': [2,7,3,3,6]
+  },
+  '5ep': {
+    'CMN': [2,4,0,2,10], 'EAR': [4,8,4,2,0],  'EFI': [1,13,2,2,0],
+    'LCL': [3,4,3,5,3],  'ING': [3,3,2,7,3],  'MAT': [3,4,4,4,3],
+    'FR2': [4,3,2,4,0]
+  },
+  '6ep': {
+    'CMN': [3,4,2,5,5], 'EAR': [8,9,2,0,0], 'EFI': [1,13,5,0,0],
+    'LCL': [2,5,3,7,2], 'ING': [5,5,1,5,3], 'MAT': [2,4,2,6,5]
+  },
+  // INFANTIL [EXC, BUE, ADE, NAD]
+  '3a': {
+    'ING': [2,6,6,0], 'REL': [2,4,1,1], 'ATEDU': [0,6,0,0],
+    'CA':  [1,8,5,0], 'DEE': [1,12,1,0],'CRR':   [1,9,4,0]
+  },
+  '4a': {
+    'ING': [1,4,4,0], 'REL': [2,3,3,1], 'CA':  [2,3,1,3],
+    'DEE': [2,3,2,2], 'CRR': [2,1,5,1]
+  },
+  '5a': {
+    'ING': [3,8,2,0], 'REL': [9,1,0,0], 'ATEDU': [1,2,0,0],
+    'CA':  [6,5,2,0], 'DEE': [6,5,2,0], 'CRR':   [5,6,2,0]
+  }
+};
+
+var _isPrim = {'1ep':1,'2ep':1,'3ep':1,'4ep':1,'5ep':1,'6ep':1};
+
+function srchMakeCharts(cursoId, mat) {
+  var d = _srchData[cursoId][mat];
+  if (!d) return;
+  var isPrim = !!_isPrim[cursoId];
+  var labels = isPrim ? ['SB','NT','BI','SU','IN'] : ['EXC','BUE','ADE','NAD'];
+  var colors = isPrim
+    ? ['#1565C0','#2E7D32','#F57F17','#E65100','#C62828']
+    : ['#1565C0','#2E7D32','#F57F17','#C62828'];
+
+  // Destroy old charts
+  var barId = 'sc-bar-'+cursoId+'-'+mat;
+  var donaId = 'sc-dona-'+cursoId+'-'+mat;
+  if (_srchCharts[barId]) { _srchCharts[barId].destroy(); delete _srchCharts[barId]; }
+  if (_srchCharts[donaId]) { _srchCharts[donaId].destroy(); delete _srchCharts[donaId]; }
+
+  var barEl = document.getElementById(barId);
+  var donaEl = document.getElementById(donaId);
+  if (!barEl || !donaEl) return;
+
+  _srchCharts[barId] = new Chart(barEl, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: d,
+        backgroundColor: colors,
+        borderRadius: 6,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: function(ctx) { return ctx.raw + ' alumnos'; } } }
+      },
+      scales: {
+        y: { beginAtZero: true, ticks: { stepSize: 1 } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  _srchCharts[donaId] = new Chart(donaEl, {
+    type: 'doughnut',
+    data: {
+      labels: labels,
+      datasets: [{ data: d, backgroundColor: colors, borderWidth: 2 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } },
+        tooltip: { callbacks: { label: function(ctx) { return ctx.label + ': ' + ctx.raw + ' alum.'; } } }
+      },
+      cutout: '55%'
+    }
+  });
+}
+
+function srchShowResult(cursoId, mat) {
+  // Hide all results in this widget
+  var widget = document.getElementById('sw-'+cursoId);
+  if (!widget) return;
+  widget.querySelectorAll('.search-result').forEach(function(el){el.classList.remove('visible');});
+  widget.querySelectorAll('.search-chip').forEach(function(el){el.classList.remove('active');});
+  document.getElementById('sno-'+cursoId).style.display = 'none';
+
+  var result = document.getElementById('sr-'+cursoId+'-'+mat);
+  if (result) {
+    result.classList.add('visible');
+    srchMakeCharts(cursoId, mat);
+    // Highlight chip
+    var chips = widget.querySelectorAll('.search-chip');
+    chips.forEach(function(c){ if(c.textContent===mat) c.classList.add('active'); });
+  } else {
+    document.getElementById('sno-'+cursoId).style.display = 'block';
+  }
+}
+
+function srchSelect(chipEl, cursoId, mat) {
+  document.getElementById('si-'+cursoId).value = mat;
+  srchShowResult(cursoId, mat);
+}
+
+function srchFilter(inputEl, cursoId) {
+  var val = inputEl.value.trim().toUpperCase();
+  if (!val) { srchClear(cursoId); return; }
+  var data = _srchData[cursoId];
+  // Try exact match first
+  if (data && data[val]) { srchShowResult(cursoId, val); return; }
+  // Try partial
+  if (data) {
+    var keys = Object.keys(data);
+    var match = keys.find(function(k){ return k.indexOf(val) === 0; });
+    if (match) { srchShowResult(cursoId, match); return; }
+  }
+  // No match
+  var widget = document.getElementById('sw-'+cursoId);
+  widget.querySelectorAll('.search-result').forEach(function(el){el.classList.remove('visible');});
+  widget.querySelectorAll('.search-chip').forEach(function(el){el.classList.remove('active');});
+  document.getElementById('sno-'+cursoId).style.display = 'block';
+}
+
+function srchClear(cursoId) {
+  document.getElementById('si-'+cursoId).value = '';
+  var widget = document.getElementById('sw-'+cursoId);
+  widget.querySelectorAll('.search-result').forEach(function(el){el.classList.remove('visible');});
+  widget.querySelectorAll('.search-chip').forEach(function(el){el.classList.remove('active');});
+  document.getElementById('sno-'+cursoId).style.display = 'none';
+}
+// ── END SEARCH WIDGET ──────────────────────────────────────────
+
 </script>
 </body>
 </html>
